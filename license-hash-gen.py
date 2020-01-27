@@ -51,7 +51,7 @@ def create_hash(name, brpath, license):
     return 'sha256  {}'.format(output)
 
 skip_pkgs = ['android-tools', 'giblib', 'gpu-amd-bin-mx51', 'linux-headers', 'imx-gpu-viv', 'qpid-proton'
-        'imx-gpu-g2d']
+        'imx-gpu-g2d', 'libz160']
 with open(stats_json) as f:
     pkgs = json.load(f)['packages']
 
@@ -116,7 +116,7 @@ with open(stats_json) as f:
         print(pkg)
         pkg_hash = os.path.join(brpath, pkg['pkg_path'], '{}.hash'.format(name))
         with open(pkg_hash, "a") as myfile:
-            myfile.write('# locally computed\n')
+            myfile.write('# Locally computed\n')
             for license in pkg['license_files']:
                 line = create_hash(name, brpath, license)
                 myfile.write(line)
